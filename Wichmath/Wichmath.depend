@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1476215559 source:c:\programminglabs\wichmath\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

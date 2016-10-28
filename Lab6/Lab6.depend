@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1476104793 source:c:\programminglabs\lab6\main.c
+	<stdio.h>
+	<stdlib.h>
+	<malloc.h>
+
