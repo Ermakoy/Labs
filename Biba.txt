@@ -1,0 +1,68 @@
+CREATE TABLE Users (
+		ID INT IDENTITY(1,1) NOT NULL,
+        EMail varchar(64) not null,
+        hash_pass varchar(64) not null,
+        User_status int not null,
+        PRIMARY KEY (ID)
+);
+
+CREATE TABLE Orders (
+		ID INT IDENTITY(1,1) NOT NULL,
+		SECTION_NAME varchar(64) NOT NULL,
+		Order_ID int NOT NULL,
+		PRIMARY KEY (ID)
+);
+CREATE TABLE OrderProduct(
+		ID INT IDENTITY(1,1) NOT NULL,
+		order_id int NOT NULL,
+		product_id int NOT NULL,
+		PRIMARY KEY (ID)
+);
+CREATE TABLE Items (
+		ID INT IDENTITY(1,1) NOT NULL,
+		color varchar(64),
+		category varchar(64) NOT NULL,
+		PRIMARY KEY (ID)
+);
+CREATE TABLE bookmarks (
+		ID INT IDENTITY(1,1) NOT NULL,
+		item_id int NOT NULL,
+		user_id int NOT NULL,
+		PRIMARY KEY (ID) 
+);
+CREATE TABLE custom_param (
+		ID INT IDENTITY(1,1) NOT NULL,
+		item_id int NOT NULL,
+		name varchar(64) NOT NULL,
+		PRIMARY KEY (ID)
+);
+CREATE TABLE custom_param_values (
+		ID INT IDENTITY(1,1) NOT NULL,
+		value float NOT NULL
+		PRIMARY KEY (ID) 
+);
+
+ALTER TABLE Users
+ADD CONSTRAINT fk_userOrder
+FOREIGN KEY (ID)
+REFERENCES Orders(ID)
+
+ALTER TABLE Orders
+ADD CONSTRAINT fk_OrdersItems
+FOREIGN KEY (ID)
+REFERENCES OrderProduct(order_id)
+
+ALTER TABLE Items
+ADD CONSTRAINT fk_ItemsOrders
+FOREIGN KEY (ID)
+REFERENCES OrderProduct(item_id)
+
+ALTER TABLE Items
+ADD CONSTRAINT fk_ItemsParams
+FOREIGN KEY (ID)
+REFERENCES custom_param(item_id)
+
+ALTER TABLE custom_param
+ADD CONSTRAINT fk_Param_paramvalues
+FOREIGN KEY (ID)
+REFERENCES custom_param_values(ID)
